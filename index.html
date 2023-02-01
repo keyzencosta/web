@@ -168,6 +168,17 @@
 				</div>
 				
 				<div class="col-12">
+				  <label for="endereco" class="form-label">Motivo do Report:</label>
+				  <div class="input-group has-validation">
+					<span class="input-group-text">Motivo</span>
+					  <textarea class="form-control" aria-label="With textarea"></textarea>
+				  <div class="invalid-feedback">
+					  Your username is required.
+					</div>
+				  </div>
+				</div>
+				
+				<div class="col-12">
 				  <label class="form-label" for="tecnologia">Marca do dispositivo</label>
 	  <select class="form-select" id="inputGroupSelect01">
 		<option selected>SELECIONE</option>
@@ -203,16 +214,11 @@
 	  </main>
 	  <footer class="my-5 pt-5 text-muted text-center text-small">
 		<p class="mb-1">&copy; 2023 Claro RNO</p>
-		
 	  </footer>
 	</div>
-
-
-
 	<script>
  
  var map = L.map('map').locate({setView: true, maxZoom: 16});
-
 function onLocationFound(e) {
     var lat = e.latitude;
     var lng = e.longitude;
