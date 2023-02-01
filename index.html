@@ -211,6 +211,14 @@
 			</form>
 		  </div>
 		</div>
+		
+		<form id="form">
+  <input type="text" id="name" placeholder="Nome">
+  <input type="email" id="email" placeholder="Email">
+  <button type="button" onclick="saveData()">Salvar</button>
+</form>
+		
+		
 	  </main>
 	  <footer class="my-5 pt-5 text-muted text-center text-small">
 		<p class="mb-1">&copy; 2023 Claro RNO</p>
@@ -247,23 +255,31 @@ map.on('locationfound', onLocationFound);
 	  
 	  // envio do form
 	  
- var form_rede = document.getElementById("form");
-  form.addEventListener("submit", function(event) {
-    event.preventDefault();
+  function saveData() {
+    // obtém os dados do formulário
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
 
-    var inputName = document.getElementById("inputName").value;
-    localStorage.setItem("inputName", inputName);
-  });
+    // cria uma nova linha no arquivo CSV
+    const csv = `${name},${email}\n`;
 
-  if (navigator.onLine) {
-    var storedInputName = localStorage.getItem("inputName");
-    if (storedInputName) {
-      // Enviar dados para o servidor aqui
+    // salva os dados no armazenamento local
+    localStorage.setItem("formData", csv);
+  }
+
+  // verifica se o navegador está online
+  window.addEventListener("online", function () {
+    // obtém os dados do armazenamento local
+    const formData = localStorage.getItem("formData");
+
+    if (formData) {
+      // envia os dados para o servidor
       // ...
 
-      // Remover dados armazenados após o envio
-      localStorage.removeItem("inputName");
+      // remove os dados do armazenamento local
+      localStorage.removeItem("formData");
     }
+  });
   }
 	// fim envio do form	
 	
