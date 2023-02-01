@@ -253,58 +253,29 @@ map.on('locationfound', onLocationFound);
 	  // salvar os dados do formulário no localStorage
 function Enviar() {
 
- var nome = document.getElementById("nome");
 
-    if (nome.value != "") {
-        alert(nome.value);
-    }
+var online = navigator.onLine; // true ou false, (há, não há conexão à internet)
+if(online) {
+
+   alert("Parabéns você está Online online");
+   
+}else{
+
+ alert("Sem conexão com a internet. Os dados serão enviados quando houver conexão.");
+
+   }
+
 	
-	alert('Erro ');
-
-  // obter dados do formulário
-  var formData = {
-    name: document.getElementById("nome").value,
-    email: document.getElementById("email").value,
-    message: document.getElementById("message").value
-  };
-
-  // salvar dados no localStorage
-  localStorage.setItem("formData", JSON.stringify(formData));
+}else{
+alert("Erro");
+   
 }
 
-// enviar os dados do formulário ao servidor
-function sendFormData() {
-  // obter dados do localStorage
-  var formData = JSON.parse(localStorage.getItem("formData"));
 
-  // verificar se existem dados
-  if (formData) {
-    // enviar dados para o servidor aqui...
 
-    // remover dados do localStorage depois de enviar com sucesso
-    localStorage.removeItem("formData");
-  }
-}
 
-// verificar se há conexão com a internet
-window.addEventListener("online", sendFormData);
 
-// ouvir o evento de submit do formulário
-document.getElementById("form").addEventListener("submit", function(event) {
-  event.preventDefault();
 
-  // salvar dados do formulário
-  saveFormData();
-
-  // verificar se há conexão com a internet
-  if (navigator.onLine) {
-    // enviar dados do formulário se houver conexão com a internet
-    sendFormData();
-  } else {
-    // exibir mensagem de erro se não houver conexão com a internet
-    alert("Sem conexão com a internet. Os dados serão enviados quando houver conexão.");
-  }
-});
 	  
 	 
 	
