@@ -106,7 +106,7 @@
 			
 	<div id="map" class="map"></div>
 	  <hr class="my-4">
-<div <form class="row g-3">
+<div <form class="row g-3" id="form_rede">
 
 	            <div class="col-sm-6">
 				  <label for="firstName" class="form-label">Latitude:</label>
@@ -179,7 +179,6 @@
 		<option value="3">OUTRO</option>
 	  </select>
 				</div>
-				
 				 <div class="col-sm-12">
 				  <label for="lastName" class="form-label">Modelo do Aparelho</label>
 				  <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
@@ -187,28 +186,21 @@
 					Valid last name is required.
 				  </div>
 				</div>
-				
 				<div class="col-12">
 				  <label class="form-label" for="tecnologia">Ambiente Fechado?</label>
 	  <select class="form-select" id="inputGroupSelect01">
 		<option selected>SELECIONE</option>
 		<option value="1">SIM</option>
 		<option value="2">NÃO</option>
-		
 	  </select>
 				</div>
-
 			  </div>
-
-
 			  <hr class="my-4">
-
 			  <button class="w-100 btn btn-danger btn-lg" type="submit">Enviar Report</button>
 			</form>
 		  </div>
 		</div>
 	  </main>
-
 	  <footer class="my-5 pt-5 text-muted text-center text-small">
 		<p class="mb-1">&copy; 2023 Claro RNO</p>
 		
@@ -218,11 +210,8 @@
 
 
 	<script>
-
-
-	 
-	 
-	 var map = L.map('map').locate({setView: true, maxZoom: 16});
+ 
+ var map = L.map('map').locate({setView: true, maxZoom: 16});
 
 function onLocationFound(e) {
     var lat = e.latitude;
@@ -232,12 +221,7 @@ function onLocationFound(e) {
      document.getElementById("longitude").value = lng;
 }
 
-
-
 map.on('locationfound', onLocationFound);
-
-
-	
 
 	  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -252,6 +236,38 @@ map.on('locationfound', onLocationFound);
 		  L.marker(res.latlng).addTo(map).bindPopup(res.address.Match_addr).openPopup();
 		});
 	  });	
+	  
+	  
+	  
+	  
+	  
+ var form_rede = document.getElementById("form");
+  form.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    var inputName = document.getElementById("inputName").value;
+    localStorage.setItem("inputName", inputName);
+  });
+
+  if (navigator.onLine) {
+    var storedInputName = localStorage.getItem("inputName");
+    if (storedInputName) {
+      // Enviar dados para o servidor aqui
+      // ...
+
+      // Remover dados armazenados após o envio
+      localStorage.removeItem("inputName");
+    }
+  }
+</script>
+Neste exemplo, quando o usuário preenche o formulário e clica no botão "Salvar", o evento submit é capturado e o valor do campo de entrada é armazenado no LocalStorage. Quando a conexão à internet é restaurada, o script verifica se há algum dado armazenado e, em caso afirmativo, envia-os para o servidor. Em seguida, os dados são removidos do armazenamento local.
+
+Observe que você precisará implementar a lógica de envio de dados para o servidor, que pode incluir uma solicitação HTTP usando algo como o Fetch API ou um framework de terceiros como Axios.
+
+
+
+
+
 	  
 	  
 	
